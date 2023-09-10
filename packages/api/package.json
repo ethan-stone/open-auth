@@ -17,6 +17,8 @@
     "@planetscale/database": "^1.11.0",
     "drizzle-orm": "^0.28.6",
     "hono": "^3.5.8",
-    "winston": "^3.10.0"
+    "nanoid": "^4.0.2",
+    "winston": "^3.10.0",
+    "zod": "^3.22.2"
   }
 }
