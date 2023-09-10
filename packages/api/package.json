@@ -7,9 +7,13 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "@types/node": "^20.6.0",
     "@types/aws-lambda": "^8.10.119",
-    "vitest": "^0.34.4",
-    "sst": "^2.24.26"
+    "@types/node": "^20.6.0",
+    "sst": "^2.24.26",
+    "vitest": "^0.34.4"
+  },
+  "dependencies": {
+    "hono": "^3.5.8",
+    "pino": "^8.15.1"
   }
 }

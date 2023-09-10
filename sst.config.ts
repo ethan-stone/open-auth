@@ -9,6 +9,12 @@ export default {
     };
   },
   stacks(app) {
+    app.setDefaultFunctionProps({
+      runtime: "nodejs18.x",
+      nodejs: {
+        minify: false,
+      },
+    });
     app.stack(API);
-  }
+  },
 } satisfies SSTConfig;
