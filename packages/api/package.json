@@ -9,10 +9,13 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.119",
     "@types/node": "^20.6.0",
+    "drizzle-kit": "^0.19.13",
     "sst": "^2.24.26",
     "vitest": "^0.34.4"
   },
   "dependencies": {
+    "@planetscale/database": "^1.11.0",
+    "drizzle-orm": "^0.28.6",
     "hono": "^3.5.8",
     "winston": "^3.10.0"
   }

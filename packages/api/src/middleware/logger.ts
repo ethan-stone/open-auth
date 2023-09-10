@@ -18,8 +18,6 @@ export function logger(): MiddlewareHandler {
       path,
     });
 
-    console.log("owiejfoweijf");
-
     await next();
 
     log.info("Outgoing response", {
