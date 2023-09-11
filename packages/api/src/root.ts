@@ -3,10 +3,10 @@ import { handle } from "hono/aws-lambda";
 import { validator } from "hono/validator";
 import { logger } from "src/middleware/logger";
 import { z } from "zod";
-import { db } from "./db/client";
-import { clients } from "./db/schema";
-import { uid } from "./utils/uid";
-import { eq } from "drizzle-orm";
+import { createClient } from "./use-cases/create-client";
+import { clientsRepo } from "./repos/clients-repo";
+import { json } from "stream/consumers";
+import { jsonValidator } from "./utils/json-validator";
 
 const app = new Hono();
 
@@ -18,38 +18,19 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-app.post(
-  "/clients",
-  validator("json", (value, c) => {
-    const parsed = schema.safeParse(value);
+app.post("/clients", jsonValidator(schema), async (c) => {
+  const json = c.req.valid("json") as Schema;
 
-    if (!parsed.success) {
-      return c.json(
-        {
-          error: "Invalid request",
-        },
-        400
-      );
-    }
-
-    return parsed.data;
-  }),
-  async (c) => {
-    const json = c.req.valid("json") as Schema;
-
-    const id = uid(36);
-
-    await db.insert(clients).values({
-      id,
+  const client = await createClient(
+    {
       name: json.name,
-    });
+    },
+    {
+      clientRepo: clientsRepo,
+    }
+  );
 
-    const result = await db.query.clients.findFirst({
-      where: eq(clients.id, id),
-    });
-
-    return c.json(result);
-  }
-);
+  return c.json(client);
+});
 
 export const handler = handle(app);

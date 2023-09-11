@@ -1,4 +1,3 @@
-import { sql } from "drizzle-orm";
 import {
   binary,
   index,
@@ -6,7 +5,6 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
-import { uid } from "src/utils/uid";
 
 export const clients = mysqlTable(
   "clients",
@@ -15,9 +13,7 @@ export const clients = mysqlTable(
     name: varchar("name", { length: 255 }).notNull(),
     secret: varchar("secret", {
       length: 255,
-    })
-      .notNull()
-      .$defaultFn(() => uid(72)),
+    }).notNull(),
     createdAt: timestamp("created_at")
       .notNull()
       .$defaultFn(() => new Date()),
