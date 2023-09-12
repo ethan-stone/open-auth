@@ -1,5 +1,6 @@
 import { NotFoundError } from "src/errors";
 import { type ClientRepo } from "src/repos/clients-repo";
+import { log } from "src/utils/logger";
 
 type Args = {
   grantType: "client_credentials";
@@ -23,6 +24,8 @@ export async function createToken(args: Args, ctx: Ctx) {
   if (!client) {
     throw new NotFoundError(`Client with id ${args.clientId} not found`);
   }
+
+  log.info("generating token for client", { clientId: args.clientId });
 
   return {
     accessToken: "dummy token",

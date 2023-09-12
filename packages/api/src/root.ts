@@ -20,7 +20,7 @@ async function runUseCase(
 
     return c.json(null, { status: 204 });
   } catch (error) {
-    log.error("error", error); // TODO: figure out why this isn't logging anything
+    log.error("error", error);
     if (error instanceof BaseError) {
       return c.json(
         { error: { name: error.name, message: error.message } },
