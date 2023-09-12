@@ -7,6 +7,7 @@ import { clientsRepo } from "./repos/clients-repo";
 import { jsonValidator } from "./utils/json-validator";
 import { BaseError } from "./errors";
 import { createToken } from "./use-cases/create-token";
+import { log } from "./utils/logger";
 
 async function runUseCase(
   c: Context,
@@ -19,6 +20,7 @@ async function runUseCase(
 
     return c.json(null, { status: 204 });
   } catch (error) {
+    log.error("error", error); // TODO: figure out why this isn't logging anything
     if (error instanceof BaseError) {
       return c.json(
         { error: { name: error.name, message: error.message } },
