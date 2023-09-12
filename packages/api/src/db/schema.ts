@@ -1,10 +1,4 @@
-import {
-  binary,
-  index,
-  mysqlTable,
-  timestamp,
-  varchar,
-} from "drizzle-orm/mysql-core";
+import { index, mysqlTable, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 export const clients = mysqlTable(
   "clients",

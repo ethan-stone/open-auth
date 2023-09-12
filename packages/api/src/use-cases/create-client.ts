@@ -21,5 +21,8 @@ export async function createClient(args: Args, ctx: Ctx) {
     secret: hashedSecret,
   });
 
-  return client;
+  return {
+    ...client,
+    secret,
+  };
 }
