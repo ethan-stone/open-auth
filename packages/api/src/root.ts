@@ -1,11 +1,9 @@
 import { Hono } from "hono";
 import { handle } from "hono/aws-lambda";
-import { validator } from "hono/validator";
 import { logger } from "src/middleware/logger";
 import { z } from "zod";
 import { createClient } from "./use-cases/create-client";
 import { clientsRepo } from "./repos/clients-repo";
-import { json } from "stream/consumers";
 import { jsonValidator } from "./utils/json-validator";
 
 const app = new Hono();
